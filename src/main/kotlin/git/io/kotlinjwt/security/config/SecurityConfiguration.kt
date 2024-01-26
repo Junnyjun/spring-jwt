@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.web.cors.CorsConfiguration
 
 @Configuration
 @EnableWebSecurity
@@ -22,7 +23,15 @@ class SecurityConfiguration {
         .authenticationManager{
             it
         }
+        .cors { it.configurationSource { corsConfiguration() } }
         .portMapper { it.http(8080).mapsTo(8443) }
         .build()
+
+    private fun corsConfiguration(): CorsConfiguration = CorsConfiguration().apply {
+        allowedOrigins = listOf("junnyland.com")
+        allowedMethods = listOf("*")
+        allowedHeaders = listOf("*")
+        allowCredentials = true
+    }
 
 }
