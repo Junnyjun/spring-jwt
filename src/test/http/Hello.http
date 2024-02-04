@@ -1,0 +1,6 @@
+## . curl -u junnyland:1234 -k https://localhost:8080/hello
+GET http://localhost:8080/hello
+Content-Type: application/json
+user: junnyland
+password: 1234
+
