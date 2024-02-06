@@ -38,18 +38,18 @@ class SecurityConfiguration(
         .authenticationProvider(authenticationProvider)
         .build()
 
-    @Component
-    class CustomAuthenticationProvider: AuthenticationProvider {
-        override fun authenticate(authentication: Authentication): Authentication {
-            val username = authentication.name
-            val password = authentication.credentials.toString()
-            if (username == "junnyland" && password == "1234") {
-                return UsernamePasswordAuthenticationToken(username, password, emptyList())
-            }
-            throw BadCredentialsException("Authentication failed for user $username")
-        }
-        override fun supports(authentication: Class<*>): Boolean {
-            return UsernamePasswordAuthenticationToken::class.java.isAssignableFrom(authentication)
-        }
-    }
+//    @Component
+//    class CustomAuthenticationProvider: AuthenticationProvider {
+//        override fun authenticate(authentication: Authentication): Authentication {
+//            val username = authentication.name
+//            val password = authentication.credentials.toString()
+//            if (username == "junnyland" && password == "1234") {
+//                return UsernamePasswordAuthenticationToken(username, password, emptyList())
+//            }
+//            throw BadCredentialsException("Authentication failed for user $username")
+//        }
+//        override fun supports(authentication: Class<*>): Boolean {
+//            return UsernamePasswordAuthenticationToken::class.java.isAssignableFrom(authentication)
+//        }
+//    }
 }
