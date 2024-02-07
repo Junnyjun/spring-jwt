@@ -25,7 +25,6 @@ import org.springframework.web.cors.CorsConfiguration
 @EnableWebSecurity
 class SecurityConfiguration(
     private val objectPostProcessor: ObjectPostProcessor<Any>,
-    private val authenticationProvider: AuthenticationProvider
 ) {
 
     @Bean
@@ -35,7 +34,7 @@ class SecurityConfiguration(
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain = http
         .httpBasic { }
         .authorizeHttpRequests { it.anyRequest().authenticated() }
-        .authenticationProvider(authenticationProvider)
+//        .authenticationProvider(authenticationProvider)
         .build()
 
 //    @Component
