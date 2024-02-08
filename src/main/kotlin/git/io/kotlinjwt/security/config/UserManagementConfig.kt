@@ -12,15 +12,16 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager
 @Configuration
 class UserManagementConfig {
 
-    fun adf(){
-        val read:GrantedAuthority = GrantedAuthority { "READ" }
-        val write:GrantedAuthority = GrantedAuthority { "WRITE" }
-    }
+
+    val read: GrantedAuthority = GrantedAuthority { "READ" }
+    val write: GrantedAuthority = GrantedAuthority { "WRITE" }
 
     @Bean
-    fun userDetailsService(): UserDetailsService = InMemoryUserDetailsManager()
-        .also { it.createUser(withUsername("junnyland").password("1234").roles("USER")
-        .build()) }
+    fun userDetailsService(): UserDetailsService = InMemoryUserDetailsManager().also {
+        it.createUser(
+            withUsername("junnyland").password("1234").roles("USER").build()
+        )
+    }
 
 
     @Bean
