@@ -1,4 +1,4 @@
-package git.io.kotlinjwt.security.application.`in`
+package git.io.kotlinjwt.security.application.gateway.`in`
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController

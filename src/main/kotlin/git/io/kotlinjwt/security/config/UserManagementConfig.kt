@@ -1,28 +1,24 @@
 package git.io.kotlinjwt.security.config
 
+import git.io.kotlinjwt.security.application.domain.Users
+import git.io.kotlinjwt.security.application.usecase.InMemoryUserDetailsService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.userdetails.User.withUsername
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.factory.PasswordEncoderFactories.createDelegatingPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
 
 @Configuration
 class UserManagementConfig {
-
-
-    val read: GrantedAuthority = GrantedAuthority { "READ" }
-    val write: GrantedAuthority = GrantedAuthority { "WRITE" }
+    private val users : UserDetails = Users(
+        username = "junnyland",
+        password = "1234",
+        authority = listOf("USER")
+    )
 
     @Bean
-    fun userDetailsService(): UserDetailsService = InMemoryUserDetailsManager().also {
-        it.createUser(
-            withUsername("junnyland").password("1234").roles("USER").build()
-        )
-    }
-
+    fun userDetailsService(): UserDetailsService = InMemoryUserDetailsService(listOf(users))
 
     @Bean
     fun passwordEncoder(): PasswordEncoder = createDelegatingPasswordEncoder()
