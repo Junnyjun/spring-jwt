@@ -13,7 +13,6 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 @EnableWebSecurity
 class SecurityConfiguration(
-    private val customAuthenticationProvider: CustomAuthenticationProvider
 ) {
 
 
@@ -24,12 +23,5 @@ class SecurityConfiguration(
             .failureHandler { _, response, _ -> response.sendRedirect("/error") }
         }
         .build()
-
-
-    @Bean
-    fun bCryptPasswordEncoder(): PasswordEncoder = BCryptPasswordEncoder(4)
-
-    @Bean
-    fun sCryptPasswordEncoder(): PasswordEncoder = SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8()
 
 }

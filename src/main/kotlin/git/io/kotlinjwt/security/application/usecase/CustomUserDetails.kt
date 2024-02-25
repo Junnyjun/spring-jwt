@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails
 class CustomUserDetails(
     private val user: User
 ): UserDetails {
+    val getUser get() = user
     override fun getAuthorities(): List<GrantedAuthority> = user.authorities
         .map { authority -> GrantedAuthority { authority.name } }
         .toList()
