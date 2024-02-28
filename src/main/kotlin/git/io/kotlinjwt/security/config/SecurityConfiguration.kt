@@ -1,5 +1,6 @@
 package git.io.kotlinjwt.security.config
 
+import git.io.kotlinjwt.security.application.usecase.CustomAuthenticationProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -13,6 +14,7 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 @EnableWebSecurity
 class SecurityConfiguration(
+    private val authenticationProvider: CustomAuthenticationProvider
 ) {
 
 
@@ -22,6 +24,8 @@ class SecurityConfiguration(
             .successHandler { _, response, _ -> response.sendRedirect("/hello") }
             .failureHandler { _, response, _ -> response.sendRedirect("/error") }
         }
+        .authorizeHttpRequests { it.anyRequest().authenticated() }
+        .authenticationProvider(authenticationProvider)
         .build()
 
 }
