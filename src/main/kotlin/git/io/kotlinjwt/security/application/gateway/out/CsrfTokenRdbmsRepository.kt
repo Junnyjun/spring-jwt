@@ -6,19 +6,21 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.web.csrf.CsrfToken
 import org.springframework.security.web.csrf.CsrfTokenRepository
+import org.springframework.security.web.csrf.DefaultCsrfToken
+import java.util.*
 
 class CsrfTokenRdbmsRepository(
     private val csrfTokenRepository: TokenRepository
 ) : CsrfTokenRepository {
-    override fun generateToken(request: HttpServletRequest?): CsrfToken {
-        return csrfTokenRepository.save(Token())
-    }
+    override fun generateToken(request: HttpServletRequest): CsrfToken =
+        DefaultCsrfToken("X-CSRF-TOKEN", "_csrf","${UUID.randomUUID()}")
 
-    override fun saveToken(token: CsrfToken?, request: HttpServletRequest?, response: HttpServletResponse?) {
-        TODO("Not yet implemented")
+    override fun saveToken(token: CsrfToken, request: HttpServletRequest, response: HttpServletResponse) {
+        csrfTokenRepository.findByIdentifier(request.getHeader("X-IDENTIFIER"))
+            ?.let { csrfTokenRepository.save((Token(token = UUID.fromString(token.token), identifier = "JUNNYLAND"))) }
+            ?: csrfTokenRepository.save(Token(token = UUID.fromString(token.token), identifier = "JUNNYLAND"))
     }
-
-    override fun loadToken(request: HttpServletRequest?): CsrfToken {
-        TODO("Not yet implemented")
-    }
+    override fun loadToken(request: HttpServletRequest): CsrfToken? =
+        csrfTokenRepository.findByIdentifier(request.getHeader("X-IDENTIFIER"))
+            ?.let { DefaultCsrfToken("X-CSRF-TOKEN", "_csrf", it.token.toString()) }
 }
