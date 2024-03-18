@@ -4,8 +4,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority
 
 class UsernamePasswordAuthentication (
-    principal: Any?,
-    credentials: Any?,
+    principal: Any,
+    credentials: Any,
     authorities: MutableCollection<out GrantedAuthority>?
 ): UsernamePasswordAuthenticationToken(principal, credentials, authorities) {
 }
