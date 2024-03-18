@@ -4,17 +4,17 @@ import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.core.Authentication
 
 class UsernamePasswordAuthenticationProvider(
-    private val sendOTPGateway: SendOTPGateway
+//    private val sendOTPGateway: SendOTPGateway
 ) : AuthenticationProvider {
     override fun authenticate(authentication: Authentication): Authentication {
         val name = authentication.name
         val password = authentication.credentials.toString()
 
-        sendOTPGateway.send(name, password)
+//        sendOTPGateway.send(name, password)
         return  UsernamePasswordAuthentication(name, password, null)
     }
 
     override fun supports(authentication: Class<*>?): Boolean {
-        TODO("Not yet implemented")
+        return UsernamePasswordAuthentication::class.java.isAssignableFrom(authentication)
     }
 }
