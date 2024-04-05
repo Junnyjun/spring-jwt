@@ -5,7 +5,8 @@ import jakarta.persistence.*
 @Entity
 class User(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long = 0L,
     val username: String,
     val password: String,
@@ -14,6 +15,7 @@ class User(
     val algorithm: EncryptAlgorithm,
 
     @OneToMany
+    @JoinColumn(name = "user")
     val authorities: List<Authority>
 ) {
 

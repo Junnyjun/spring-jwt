@@ -7,15 +7,15 @@ import io.jsonwebtoken.security.Keys
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
-@Component
+//@Component
 class InitialAuthenticationFilter(
-    private val manger: AuthenticationManager,
-    @Value("\${security.jwt.secret}") private val secret: String
+    @Qualifier("authenticationManager") private val manger: AuthenticationManager,
+    @Value("\${jwt.secret}") private val secret: String
 ) : OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,

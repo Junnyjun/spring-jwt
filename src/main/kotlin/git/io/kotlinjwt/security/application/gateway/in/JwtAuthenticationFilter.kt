@@ -14,7 +14,7 @@ import org.springframework.web.filter.OncePerRequestFilter
 
 @Component
 class JwtAuthenticationFilter(
-    @Value("\${security.jwt.secret}") private val secret: String
+    @Value("\${jwt.secret}") private val secret: String
 ) : OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,

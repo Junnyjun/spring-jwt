@@ -5,7 +5,7 @@ import jakarta.persistence.*
 @Entity
 class Authority(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long = 0L,
     val name: String,
     @ManyToOne

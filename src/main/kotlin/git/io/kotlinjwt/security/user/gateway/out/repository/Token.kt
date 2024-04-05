@@ -1,15 +1,13 @@
 package git.io.kotlinjwt.security.user.gateway.out.repository
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import java.util.UUID
+import jakarta.persistence.*
+import java.util.*
 
 @Entity
 class Token(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long = 0L,
     val token: UUID,
     val identifier: String,
