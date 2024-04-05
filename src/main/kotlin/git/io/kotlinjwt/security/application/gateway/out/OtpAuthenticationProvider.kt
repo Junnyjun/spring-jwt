@@ -2,7 +2,9 @@ package git.io.kotlinjwt.security.application.gateway.out
 
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.core.Authentication
+import org.springframework.stereotype.Component
 
+@Component
 class OtpAuthenticationProvider(
     
 //    private val sendOTPGateway: SendOTPGateway
